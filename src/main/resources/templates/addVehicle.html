@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Añadir Vehiculo')"></head>
+
+<body>
+<div class="container h-100 pb-3" style="background-color: #D6EAF8;">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-10">
+
+            <h2 class="text-center" th:text="'Añadir Vehiculo '"></h2>
+
+            <form method="post" th:action="@{/cliente/{id}/addVehicle(id=${cliente.getIdCliente()})}"
+                  th:object="${clienteData}">
+
+                <div class="form-group">
+                    <label for="nombre">Nombre del cliente:</label>
+                    <input class="form-control" id="nombre" name="nombre" required th:field="*{nombre}" type="text"
+                           disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Telefono del cliente:</label>
+                    <input class="form-control" id="telefono" name="telefono" required th:field="*{telefono}"
+                           type="number" disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email del cliente:</label>
+                    <input class="form-control" id="email" name="email" required th:field="*{email}" type="text"
+                           disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Direccion del cliente:</label>
+                    <input class="form-control" id="direccion" name="direccion" required th:field="*{direccion}"
+                           type="text" disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="localidad">Localidad del cliente:</label>
+                    <input class="form-control" id="localidad" name="localidad" required th:field="*{localidad}"
+                           type="text" disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="codigoPostal">Codigo Postal del cliente:</label>
+                    <input class="form-control" id="codigoPostal" name="codigoPostal" required
+                           th:field="*{codigoPostal}" type="number" disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="provincia">Provincia del cliente:</label>
+                    <input class="form-control" id="provincia" name="provincia" required th:field="*{provincia}"
+                           type="text" disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="pais">Pais del cliente:</label>
+                    <input class="form-control" id="pais" name="pais" required th:field="*{pais}" type="text" disabled/>
+                </div>
+                <div class="form-group">
+                    <label>Vehiculo</label>
+                    <select th:field="*{vehiculo}">
+                        <option value="0">Seleccione:</option>
+                        <option th:each="vehiculo: ${vehiculos}" th:text="${vehiculo.getMatricula()}"
+                                th:value="${vehiculo.getIdVehiculo()}"></option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="submit">Añadir Vehiculo</button>
+                <a class="btn btn-danger" th:href="@{/cliente/lista}">Cancelar</a>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments::javascript"/>
+
+</body>
+</html>

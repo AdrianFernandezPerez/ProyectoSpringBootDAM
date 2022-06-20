@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='CrearVehiculo')"></head>
+
+<body>
+<div class="container h-100 pb-3" style="background-color: #D6EAF8;">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-10">
+
+            <h2 class="text-center" th:text="'Nuevo vehiculo '"></h2>
+
+            <form method="post" th:action="@{/vehiculo/nuevo}" th:object="${vehiculoData}">
+
+                <div class="form-group">
+                    <label for="marca">Marca:</label>
+                    <input class="form-control" id="marca" name="marca" required th:field="*{marca}" type="text"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="modelo">Modelo:</label>
+                    <input class="form-control" id="modelo" name="modelo" required th:field="*{modelo}" type="text"/>
+                </div>
+                <div class="form-group">
+                    <label for="cc">CC:</label>
+                    <input class="form-control" id="cc" name="cc" required th:field="*{cc}" type="number"/>
+                </div>
+                <div class="form-group">
+                    <label for="matricula">Matricula:</label>
+                    <input class="form-control" id="matricula" name="matricula" required th:field="*{matricula}"
+                           type="text"/>
+                </div>
+                <div class="form-group">
+                    <label for="tipoVehiculo">Tipo de vehiculo:</label>
+                    <input class="form-control" id="tipoVehiculo" name="tipoVehiculo" required
+                           th:field="*{tipoVehiculo}" type="text"/>
+                </div>
+                <div class="form-group">
+                    <label for="carroceria">Carroceria:</label>
+                    <input class="form-control" id="carroceria" name="carroceria" required th:field="*{carroceria}"
+                           type="text"/>
+                </div>
+                <button class="btn btn-primary" type="submit">Añadir vehiculo</button>
+                <a class="btn btn-danger" th:href="@{/vehiculo/lista}">Cancelar</a>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments::javascript"/>
+
+</body>
+</html>

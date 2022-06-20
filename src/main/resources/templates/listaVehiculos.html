@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Lista Vehiculos')"></head>
+<nav th:replace="fragments :: nav"></nav>
+<body>
+<div class="container-fluid bg-light">
+
+    <div class="row mt-3 pt-3 text-center  bg-light">
+        <div class="col">
+            <h2 th:text="'Listado de vehiculos'"></h2>
+        </div>
+    </div>
+
+
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>CC</th>
+                    <th>Matricula</th>
+                    <th>Tipo de Vehiculo</th>
+                    <th>Carroceria</th>
+                    <th>Cliente</th>
+                    <th colspan="2">Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="vehiculo: ${vehiculos}">
+                    <td th:text="${vehiculo.marca}"></td>
+                    <td th:text="${vehiculo.modelo}"></td>
+                    <td th:text="${vehiculo.cc}"></td>
+                    <td th:text="${vehiculo.matricula}"></td>
+                    <td th:text="${vehiculo.tipoVehiculo}"></td>
+                    <td th:text="${vehiculo.carroceria}"></td>
+                    <td th:text="${vehiculo.cliente}"></td>
+
+                    <!-- HAY QUE AÑADIR LOS ENLACES -->
+                    <td><span><a class="btn btn-warning" role="button"
+                                 th:href="@{/vehiculo/{id}/editar(id=${vehiculo.getIdVehiculo()})}">Modificar</a></span>
+                    </td>
+                    <td><span><a class="btn btn-danger" role="button"
+                                 th:onclick="'del(\'/vehiculo/' + ${vehiculo.getIdVehiculo()} +'\')'">Eliminar</a></span>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+            <div class="row pt-3 justify-content-center text-center align-items-center mx-auto"
+                 style="background-color: #AED6F1;">
+                <p><a class="btn" style="background-color: #116FFF; color: white" th:href="@{/vehiculo/nuevo}"> Nuevo
+                    vehiculo</a>
+                    <a class="btn" style="background-color: darkred; color: white" th:href="@{/gestion}">Salir</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                 th:if="${!#strings.isEmpty(mensaje)}">
+                <span th:text="${mensaje}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<div th:replace="fragments::javascript"/>
+<script type="text/javascript">
+    function del(urlBorrar) {
+        if (confirm('¿Estás seguro/a de que quieres borrar el vehiculo?')) {
+            fetch(urlBorrar, {
+                method: 'DELETE'
+            }).then((res) => location.reload());
+        }
+    }
+</script>
+</body>
+</html>

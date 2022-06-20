@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='CrearCliente')"></head>
+
+<body>
+<div class="container h-100 pb-3" style="background-color: #D6EAF8;">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-10">
+        <h2 class="text-center" th:text="'Nuevo cliente '"></h2>
+
+    <form method="post" th:action="@{/cliente/nuevo}" th:object="${clienteData}">
+
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input class="form-control" id="nombre" name="nombre" required th:field="*{nombre}" type="text"/>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Telefono:</label>
+                <input class="form-control" id="telefono" name="telefono" required th:field="*{telefono}" type="number"/>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input class="form-control" id="email" name="email" required th:field="*{email}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Direccion:</label>
+                <input class="form-control" id="direccion" name="direccion" required th:field="*{direccion}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="localidad">Localidad:</label>
+                <input class="form-control" id="localidad" name="localidad" required th:field="*{localidad}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="codigoPostal">Codigo Postal:</label>
+                <input class="form-control" id="codigoPostal" name="codigoPostal" required th:field="*{codigoPostal}" type="number"/>
+            </div>
+            <div class="form-group">
+                <label for="provincia">Provincia:</label>
+                <input class="form-control" id="provincia" name="provincia" required th:field="*{provincia}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label for="pais">Pais:</label>
+                <input class="form-control" id="pais" name="pais" required th:field="*{pais}" type="text"/>
+            </div>
+            <div class="form-group">
+                <label>Vehiculo</label>
+                <select  th:field="*{vehiculo}">
+                    <option value="0">Seleccione:</option>
+                    <option th:each="vehiculo: ${vehiculos}" th:text="${vehiculo.getMatricula()}" th:value="${vehiculo.getIdVehiculo()}"></option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Añadir cliente</button>
+            <a class="btn btn-danger" th:href="@{/cliente/lista}">Cancelar</a>
+
+    </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments::javascript"/>
+
+</body>
+</html>

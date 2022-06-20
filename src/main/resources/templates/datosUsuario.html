@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Datos')"></head>
+<nav th:replace="fragments :: nav"></nav>
+
+<body>
+<div class="container h-100 pb-3" style="background-color: #D6EAF8;">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-10">
+
+            <h2 class="text-center" th:text="'Datos de ' + ${usuario.nombre}"></h2>
+
+                <div class="form-group">
+                    <label for="nombre">Nombre del usuario:</label>
+                    <input class="form-control" id="nombre" name="nombre" required th:field="*{usuario.nombre}" type="text"
+                           disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email del usuario:</label>
+                    <input class="form-control" id="email" name="email" required th:field="*{usuario.email}"
+                           type="text" disabled/>
+                </div>
+                <div class="form-group">
+                    <label for="fechanacimiento">Fecha de nacimiento:</label>
+                    <input class="form-control" id="fechanacimiento" name="fechanacimiento" required th:field="*{usuario.fechaNacimiento}" type="date"
+                           disabled/>
+                </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments::javascript"/>
+
+<!-- Lanzamos una petición DELETE por JavaScript para borrar una tarea -->
+
+<script type="text/javascript">
+    function del(urlBorrar) {
+        if (confirm('¿Estás seguro/a de que quieres borrar la tarea?')) {
+            fetch(urlBorrar, {
+                method: 'DELETE'
+            }).then((res) => location.reload());
+        }
+    }
+</script>
+
+</body>
+</html>
